@@ -9,6 +9,16 @@
         "name": "Ralf van Dooren",
         "email": "ralfvd@gmail.com"
     },
+    "description" : {
+	     "en" : "Upload gas data to mindergas.nl",
+       "nl" : "Verstuur gasverbruik naar mindergas.nl"
+    },
+    "category": [ "energy" ],
+    "images": {
+      "large": "./assets/large.jpg",
+      "small": "./assets/small.jpg"
+      },
+
     "flow": {
       "actions": [
         {
