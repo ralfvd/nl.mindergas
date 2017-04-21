@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+    <head>
+
+    </head>
+    <body>
+
+        <h1>MinderGas</h1>
+        <p>Uitleg</p>
+
+        <h2>Api Token</h2>
+        <p>Request your API token on the mindergas.nl website, then submit and save it here. </p>
+
+        <h2>After midnight</h2>
+        <P>It is recommended to initiate the flow just after midnight, so you get the most accurate results for that day.
+          Check this if you run after midnight, then the reading is recorded on 'yesterday's day'. If you upload before midnight,
+          leave this unchecked, then it will record the reading on the day on the day of initiating the flow.
+
+        <h2>Maximum Delay</h2>
+        <P>To avoid a high load on the MinderGas website. the flow will introduce a random delay before sending the result to the website.
+           You can configure the maximum delay here. MinderGas recommends a 60 minute delay.
+
+        <fieldset>
+            <legend>Settings</legend>
+
+            <div class="field row">
+                <label for="apiToken">Your API token</label>
+                <input id="apiToken" type="text"/>
+            </div>
+            <div class="field row">
+                <label for="afterMidnight">Runs after midnight?</label>
+                <input id="afterMidnight" type="checkbox" />
+            </div>
+            <div class="field row">
+                <label for="maximumDelay">Maximum delay</label>
+                <input id="maximumDelay" type="number" />
+            </div>
+        </fieldset>
+
+        <button class="right" onclick="save()">Save changes</button>
+
+        <script type="text/javascript">
+        function onHomeyReady(){
+          Homey.get('apiToken', function(err,data) {
+                document.getElementById('apiToken').value = data;
+            });
+          Homey.get('afterMidnight', function(err,data) {
+                document.getElementById('afterMidnight').checked = data;
+            });
+          Homey.get('maximumDelay', function(err,data) {
+                document.getElementById('maximumDelay').value = data;
+              });
+          Homey.ready();
+        }
+
+        function save() {
+            Homey.set('apiToken', document.getElementById('apiToken').value);
+            Homey.set('afterMidnight', document.getElementById('afterMidnight').checked);
+            Homey.set('maximumDelay', document.getElementById('maximumDelay').value);
+
+        }
+        </script>
+
+    </body>
+</html>

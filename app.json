@@ -1,0 +1,35 @@
+{
+    "id": "nl.mindergas",
+    "name": {
+        "en": "MinderGas"
+    },
+    "version": "0.0.1",
+    "compatibility": "0.x || 1.x",
+    "author": {
+        "name": "Ralf van Dooren",
+        "email": "ralfvd@gmail.com"
+    },
+    "flow": {
+      "actions": [
+        {
+          "id": "uploadreading",
+          "title": {
+            "en": "Upload reading",
+            "nl": "Verstuur waarde"
+          },
+          "args":
+           [
+             {
+               "name": "value",
+               "type": "text",
+               "placeholder":
+	             {
+                 "en": "gas reading",
+	              "nl": "meterstand"
+               }
+             }
+	        ]
+        }
+      ]
+    }
+}
