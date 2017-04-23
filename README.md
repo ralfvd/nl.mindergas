@@ -24,6 +24,8 @@ If you like the app, consider a donation to support development
 ### ToDo
 
 - Add documentation
+- Add error checking on submitting data to API
+- Add error checking on maximum Delay setting
 
 ### Known bugs
 
@@ -35,6 +37,7 @@ Yes ;-)
 
 ### Changelog
 
+- V0.1.0 2017-04-23 : App store submission
 - V0.0.1 2017-04-21 : First test release on Github
 
 [pp-donate-link]: https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=ralf%40iae%2enl&lc=GB&item_name=homey%2dmindergas&item_number=homey%2dmindergas&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donateCC_LG%2egif%3aNonHosted
