@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+    <head>
+      <script type="text/javascript" src="/homey.js" data-origin="settings"></script>
+    </head>
+    <body>
+
+        <h1>MinderGas</h1>
+        <p></p>
+
+        <h2>Api Token</h2>
+        <p>Request your API token on the mindergas.nl website, then submit and save it here. </p>
+
+        <h2>After midnight</h2>
+        <P>It is recommended to initiate the flow just after midnight, so you get the most accurate results for that day.
+          Check this if you run after midnight, then the reading is recorded on 'yesterday's day'. If you upload before midnight,
+          leave this unchecked, then it will record the reading on the day on the day of initiating the flow.
+
+        <h2>Maximum Delay</h2>
+        <P>To avoid a high load on the MinderGas website, the flow will introduce a random delay before sending the result to the website.
+           You can configure the maximum delay here. MinderGas recommends a 60 minute delay.
+
+        <fieldset>
+            <legend>Settings</legend>
+
+            <div class="field row">
+                <label for="apiToken">Your API token</label>
+                <input id="apiToken" type="text"/>
+            </div>
+            <div class="field row">
+                <label for="afterMidnight">Runs after midnight?</label>
+                <input id="afterMidnight" type="checkbox" />
+            </div>
+            <div class="field row">
+                <label for="maximumDelay">Maximum delay</label>
+                <input id="maximumDelay" type="number" />
+            </div>
+        </fieldset>
+
+        <button id="save" class="right">Save changes</button>
+
+        <script type="text/javascript">
+        function onHomeyReady(Homey){
+
+          Homey.ready();
+          var apiTokenElement = document.getElementById('apiToken');
+          var afterMidnightElement= document.getElementById('afterMidnight');
+          var maximumDelayElement = document.getElementById('maximumDelay');
+          var saveElement = document.getElementById('save');
+          Homey.get('apiToken', function(err,data) {
+            if( err ) return Homey.alert( err );
+               apiTokenElement.value = apiToken;
+            });
+
+            Homey.get('afterMidnight', function(err,data) {
+              if( err ) return Homey.alert( err );
+                 afterMidnightElement.value = afterMidnight;
+              });
+
+              Homey.get('maximumDelay', function(err,data) {
+                if( err ) return Homey.alert( err );
+                   maximumDelayElement.value = maximumDelay;
+                });
+
+          saveElement.addEventListener('click', function(e) {
+                console.log('click save')
+                Homey.set('apiToken', apiTokenElement.value, function( err ){
+                    if( err ) return Homey.alert( err );
+                    Homey.alert (apiTokenElement.value)
+                });
+                Homey.set('afterMidnight', afterMidnightElement.value, function( err ){
+                    if( err ) return Homey.alert( err );
+                });
+                Homey.set('maximumDelay', maximumDelayElement.value, function( err ){
+                    if( err ) return Homey.alert( err );
+                });
+
+            });
+        }
+        </script>
+
+    </body>
+</html>

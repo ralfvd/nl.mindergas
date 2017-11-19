@@ -3,11 +3,19 @@
     "name": {
         "en": "MinderGas"
     },
-    "version": "0.1.1",
-    "compatibility": "0.x || 1.x",
+    "version": "0.2.0",
+    "compatibility": "1.x",
+    "sdk": 2,
     "author": {
         "name": "Ralf van Dooren",
         "email": "ralfvd@gmail.com"
+    },
+    "contributing": {
+        "donate": {
+            "paypal": {
+                "username": "ralfvd"
+            }
+        }
     },
     "description" : {
 	     "en" : "Upload gas data to mindergas.nl",

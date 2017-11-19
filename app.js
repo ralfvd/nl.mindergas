@@ -1,5 +1,7 @@
 "use strict";
 
+const Homey = require('homey');
+
 var http = require ('http.min')
 
 function formatDate(date) {
@@ -14,16 +16,21 @@ function formatDate(date) {
 	return [year, month, day].join('-');
 }
 
+class MindergasApp extends Homey.App {
 
-function init() {
+onInit() {
 
 
-	Homey.log(" MinderGas starting...");
+	console.log(" MinderGas starting...");
 
-	Homey.manager('flow').on('action.uploadreading', function (callback, args) {
-          var mindergastoken = Homey.manager('settings').get('apiToken');
- 					var maxdelay = Homey.manager('settings').get('maximumDelay');
-					var midnight = Homey.manager('settings').get('afterMidnight');
+//var setcountdowntimer= new Homey.FlowCardAction('set_countdown_timer', function (callback, args) {
+var uploadreadingAction = new Homey.FlowCardAction('uploadreading')
+uploadreadingAction
+    .register()
+    .registerRunListener(( args, state ) => {
+          var mindergastoken = Homey.ManagerSettings.get('apiToken');
+ 					var maxdelay = Homey.ManagerSettings.get('maximumDelay');
+					var midnight = Homey.ManagerSettings.get('afterMidnight');
 					var datum = new Date();
 					if ( midnight == true ) {
 						datum.setDate(datum.getDate() -1 );
@@ -53,14 +60,13 @@ function init() {
 								reading: mindergasreading
 							}
 						}
-
 						// delay for randomized  time to prevent hit on mindergas.nl website
 
 						var delay = Math.floor( Math.random() * maxdelay ) ;
-						Homey.log (delay);
+						console.log (delay);
 						setTimeout(function(){
 							http.post(options).then(function (result) {
-								//Homey.log('mindergas result: ' + result.response.statusCode)
+								console.log('mindergas result: ' + result.response.statusCode)
 								callback(null, true)
 								return;
 							});
@@ -69,5 +75,6 @@ function init() {
   });
 
 }
+}
 
-module.exports.init = init;
+module.exports = MindergasApp;

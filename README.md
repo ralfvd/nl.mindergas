@@ -37,6 +37,7 @@ Yes ;-)
 
 ### Changelog
 
+- V0.2.0 2017-11-18 : SDK-2 rewrite
 - V0.1.0 2017-04-23 : App store submission
 - V0.0.1 2017-04-21 : First test release on Github
 
