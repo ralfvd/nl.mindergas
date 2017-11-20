@@ -25,7 +25,7 @@
 
 
         <fieldset>
-            <legend>My Settings</legend>
+            <legend>Settings</legend>
 
             <div class="field row">
                 <label for="apiToken">Api Token</label>
@@ -33,7 +33,7 @@
             </div>
             <div class="field row">
                 <label for="afterMidnight">After midnight?</label>
-                <input id="afterMidnight" type="checkbox" value="true"/>
+                <input id="afterMidnight" type="checkbox"/>
             </div>
             <div class="field row">
                 <label for="maximumDelay">Maximum Delay</label>
@@ -64,7 +64,7 @@
 
             Homey.get('afterMidnight', function( err, afterMidnight ) {
                if( err ) return Homey.alert( err );
-               afterMidnightElement.value = afterMidnight;
+               afterMidnightElement.checked = afterMidnight;
             });
 
             Homey.get('maximumDelay', function( err, maximumDelay ) {
@@ -77,9 +77,8 @@
                 Homey.set('apiToken', apiTokenElement.value, function( err ){
                     if( err ) return Homey.alert( err );
                 });
-                Homey.set('afterMidnight', afterMidnightElement.value, function( err ){
+                Homey.set('afterMidnight', afterMidnightElement.checked, function( err ){
                     if( err ) return Homey.alert( err );
-                    Homey.alert (afterMidnightElement.value);
 
                 });
                 Homey.set('maximumDelay', maximumDelayElement.value, function( err ){
