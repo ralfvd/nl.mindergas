@@ -1,0 +1,8 @@
+{
+  "0.2.2": {
+    "en": "APItoken check, added diagnostics"
+  },
+  "0.2.3": {
+    "en": "APIToken check at startup + optimized diagnostic report"
+  }
+}
