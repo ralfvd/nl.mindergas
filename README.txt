@@ -37,6 +37,7 @@ Yes ;-)
 
 ### Changelog
 
+- V0.2.2 2020-05-15 : APIToken check at startup + optimized diagnostic report
 - V0.2.1 2019-10-28 : Fix issue #2 (Github)
 - V0.2.0 2017-11-20 : SDK-2 rewrite
 - V0.1.0 2017-04-23 : App store submission

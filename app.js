@@ -20,11 +20,17 @@ class MindergasApp extends Homey.App {
 
 onInit() {
 
+console.log(" MinderGas starting...");
 
-	console.log(" MinderGas starting...");
+var mindergasttoken = Homey.ManagerSettings.get('apiToken');
+if ( !mindergasttoken ) {
+	new Homey.Notification({excerpt:'Mindergas: missing apiToken;  enter your mindergas.nl credentials in app settings'}) // username + password set?
+			.register();
 
-//var setcountdowntimer= new Homey.FlowCardAction('set_countdown_timer', function (callback, args) {
+}
+
 var uploadreadingAction = new Homey.FlowCardAction('uploadreading')
+
 uploadreadingAction
     .register()
     .registerRunListener(( args, state ) => {
@@ -40,11 +46,14 @@ uploadreadingAction
 				 	var uploaddate=formatDate(datum);
 				 	if (mindergastoken == 'undefined')
 					{
+						new Homey.Notification({excerpt:'Mindergas: missing apiToken;  enter your mindergas.nl credentials in app settings'}) // username + password set?
+								.register();
 						callback(null,false);
 						return;
 					}
 					else {
 						var mindergasreading = args.value;
+						console.log('gasverbruik: ' + mindergasreading)
 						//var input = '{ "date": "' + uploaddate + '", "reading": ' + mindergasreading + ' }';
 						var options = {
 			    		uri: 'https://www.mindergas.nl/api/gas_meter_readings',
@@ -63,13 +72,19 @@ uploadreadingAction
 						// delay for randomized  time to prevent hit on mindergas.nl website
 
 						var delay = Math.floor( Math.random() * maxdelay ) ;
-						console.log (delay);
+
+						console.log (datum + ' ' + delay);
 						setTimeout(function(){
 							http.post(options).then(function (result) {
 								console.log('mindergas result: ' + result.response.statusCode)
+								console.log('mindergas result: ' + result.data.error)
+								console.log('mindergas result: ' + result.response.statusMessage)
+								console.log('----')
+								console.log(result)
 								callback(null, true)
 								return;
-							});
+							})
+							.catch(error => console.log(error))
 						},delay * 1000);
 											}
   });

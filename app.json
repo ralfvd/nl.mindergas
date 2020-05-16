@@ -3,7 +3,7 @@
     "name": {
         "en": "MinderGas"
     },
-    "version": "0.2.1",
+    "version": "0.2.2",
     "compatibility": ">1.x",
     "sdk": 2,
     "author": {
